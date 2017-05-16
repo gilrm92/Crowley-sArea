@@ -12,8 +12,6 @@ namespace CheckersHost.Entitys
         public string Name { get; set; }
         [JsonProperty("Email")]
         public string Email { get; set; }
-        public bool IsPlaying { get; set; }
-
         [JsonProperty("ConnectionId")]
         public string ConnectionId { get; set; }
     }

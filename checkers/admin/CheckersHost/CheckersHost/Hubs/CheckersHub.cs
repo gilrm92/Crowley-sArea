@@ -27,19 +27,6 @@ namespace CheckersHost.Hubs
             Clients.All.registerPlayerCallback();
         }
 
-        //public void CheckConnection() 
-        //{
-        //    try
-        //    {
-        //        Player player = _playersOnline.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
-        //        Clients.Client(Context.ConnectionId).checkSessionCallback(playerConverted);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogManager.Log(string.Format("Error! Message:{0}, Stack: {1}", ex.Message, ex.StackTrace));
-        //    }
-        //}
-
         public void GetAvaiableOpponents()
         {
             LogManager.Log("Geting avaiable opponents");
@@ -49,32 +36,6 @@ namespace CheckersHost.Hubs
 
             Clients.Client(myConnectionId).getAvaiableOpponentsCallback(avaiablePlayers);
         }
-
-        //public void CheckForOpponent()
-        //{
-        //    string myConnectionId = Context.ConnectionId;
-        //    bool opponentFound = false;
-
-        //    LogManager.Log(string.Format("Looking for opponents. ConnectionId {0}", myConnectionId));
-        //    Player opponent = _playersOnline.FirstOrDefault(p => p.ConnectionId != myConnectionId && !p.IsPlaying);
-        //    LogManager.Log(string.Format("Opponent is null: {0}", opponent != null));
-        //    if (opponent != null)
-        //    {
-        //        LogManager.Log(string.Format("Opponent found. ConnectionId: {0}, Name: {1}", opponent.ConnectionId, opponent.Name));
-        //        Match newMatch = new Match();
-        //        newMatch.PlayerOne = _playersOnline.FirstOrDefault(p => p.ConnectionId == myConnectionId);
-        //        newMatch.PlayerTwo = opponent;
-        //        newMatch.PlayerOne.IsPlaying = true;
-        //        newMatch.PlayerTwo.IsPlaying = true;
-        //        _matchesHappening.Add(newMatch);
-
-        //        opponentFound = true;
-        //        Clients.Clients(newMatch.PlayersConnectionIds).startMatchCallback(opponentFound, newMatch);
-        //    }
-
-        //    LogManager.Log(string.Format("OpponentFound: {0}", opponentFound));
-        //    Clients.Client(myConnectionId).startMatchCallback(opponentFound);
-        //}
 
         public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
         {
