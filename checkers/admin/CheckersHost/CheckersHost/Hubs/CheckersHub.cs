@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace CheckersHost.Hubs
@@ -37,20 +38,61 @@ namespace CheckersHost.Hubs
             Clients.Client(myConnectionId).getAvaiableOpponentsCallback(avaiablePlayers);
         }
 
-        public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
+        public void AskForMatch(string connectionId) 
+        {
+            try
+            {
+                LogManager.Log(string.Format("asking for connectionId: {0}", connectionId));
+                string connectionIdRequest = Context.ConnectionId;
+                string nameRequest = _playersOnline.FirstOrDefault(p => p.ConnectionId == connectionIdRequest).Name;
+
+                Clients.Client(connectionId).askForMatchCallback(connectionIdRequest, nameRequest);
+            }
+            catch (Exception ex)
+            {
+                LogManager.Log(string.Format("Error. Message: {0}, Stack: {1}", ex.Message, ex.StackTrace));
+            }
+            
+        }
+
+        public void ResponseForMatch(string connectionIdToResponse, bool confirmation)
+        {
+            Clients.Client(connectionIdToResponse).responseFormMatchCallback(confirmation);
+        }
+
+        public void PrepareMatch(string connectionIdRequestedMatch)
+        {
+            try
+            {
+                Player playerOne = _playersOnline.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+                Player playerTwo = _playersOnline.FirstOrDefault(p => p.ConnectionId == connectionIdRequestedMatch);
+
+                Match match = new Match();
+                match.Players.Add(playerOne);
+                match.Players.Add(playerTwo);
+
+                _matchesHappening.Add(match);
+                Clients.Clients(match.PlayersConnectionIds).prepareMatchCallback(match.IdMatch);
+
+            }
+            catch (Exception ex)
+            {
+                LogManager.Log(string.Format("Error. Message: {0}, Stack: {1}", ex.Message, ex.StackTrace));
+            }
+        }
+
+        public override Task OnDisconnected(bool stopCalled)
         {
             LogManager.Log(string.Format("Client disconnected. ConnectionId: {0}", Context.ConnectionId));
             _playersOnline.Remove(_playersOnline.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId));
 
+            //Should take match and update it.
             return base.OnDisconnected(stopCalled);
         }
 
-        public override System.Threading.Tasks.Task OnReconnected()
+        public override Task OnReconnected()
         {
-            
             LogManager.Log(string.Format("Client reconnected. ConnectionId: {0}", Context.ConnectionId));
-            Player player = _playersOnline.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
-            Clients.Client(Context.ConnectionId).checkSessionCallback(player);
             return base.OnReconnected();
         }
     }

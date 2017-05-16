@@ -11,36 +11,21 @@ namespace CheckersHost.Entitys
         {
             Guid idMatch = new Guid();
             IdMatch = idMatch.ToString();
+
+            Players = new List<Player>();
         }
 
         public string IdMatch { get; set; }
-        
-        private Player _playerOne;
-        public Player PlayerOne
+
+        public IList<Player> Players { get; set; }
+
+        public IList<string> PlayersConnectionIds
         {
-            get 
+            get
             {
-                return _playerOne;
+                return Players.Select(p => p.ConnectionId).ToList();
             }
-            set
-            {
-                PlayersConnectionIds.Add(value.ConnectionId);
-                _playerOne = value;
-            }
+            private set { }
         }
-        private Player _playerTwo;
-        public Player PlayerTwo
-        {
-            get 
-            {
-                return _playerTwo;
-            }
-            set
-            {
-                PlayersConnectionIds.Add(value.ConnectionId);
-                _playerTwo = value;
-            }
-        }
-        public IList<string> PlayersConnectionIds { get; private set; }
     }
 }
