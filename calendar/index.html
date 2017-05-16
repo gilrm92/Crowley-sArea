@@ -1,0 +1,73 @@
+<html>
+<head>
+<title> Crowley's area </title>
+
+<!-- Full calendar scripts -->
+<link rel='stylesheet' href='js/fullcalendar-3.3.1/fullcalendar.css' />
+<script src='js/fullcalendar-3.3.1/lib/jquery.min.js'></script>
+<script src='js/fullcalendar-3.3.1/lib/moment.min.js'></script>
+<script src='js/fullcalendar-3.3.1/fullcalendar.js'></script>
+<!-- #Full calendar scripts -->
+
+<script src="js/calendar.plugin.js"></script>
+
+<style>
+.passedDay
+{
+	background-color: red;
+}
+
+.today
+{
+	background-color: blue;
+}
+
+.notPassedDay
+{
+	background-color: green;
+}
+</style>
+</head>
+
+<body>
+	<center>
+		<h1> Crowley's Calendar</h1>
+		<h3> To show the days left for Crowley see your beautiful and loved girlfriend. </h3>
+		<h5>(Believe, she's very beautiful)</h5>
+	</center>
+	<hr />
+	<center>
+		<div id="divCalendar" style="width: 600px; height: 600px;">
+		</div>
+		
+		<table>
+			<tr>
+				<td>
+					<h1>Counter</h1>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2><span id="days"> </span></h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3><span id="hours"> </span></h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4><span id="minutes"> </span></h4>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h5><span id="seconds"> </span></h5>
+				</td>
+			</tr>
+		</table>
+	</center>
+	
+</body>
+</html>

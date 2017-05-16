@@ -1,0 +1,69 @@
+<html>
+<head>
+<title> Crowley's area </title>
+
+<script src='js/jquery.min.js'></script>
+<script src='js/alarm.js'></script>
+</head>
+
+<body>
+	<center>
+		<h1> Crowley's Alarm</h1>
+		<h3> Crowley loves to listen music, but hates to wake up early. </h3>
+		<h5>(He is trying now to put them together. Maybe something good can be made.)</h5>
+	</center>
+	<hr />
+	<center>
+		<table>
+			<tr>
+				<td colspan="2" align="center">
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4>Choose the time you want to wake up: </h4>
+				</td>
+				<td>
+					<input type="text" placeholder="HH" id="hour" value="" />
+					<input type="text" placeholder="mm" id="minute" value=""/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<h4>Paste here now the url with the music to start when the time comes.</h4>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="text" placeholder="Url with song to play" id="url" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value="Alarm IT!" onclick="saveInfo()" />
+				</td>
+			</tr>
+		</table>
+		<h4>Now the time is: <span id="now"></span></h3>
+		<br />
+		<h4>Alarm setted to: <span id="alarmTime">Nothing</span> </h3>
+		<br />
+		<h4>Url: <span id="urlDisplay">Nothing</span></h4>
+		<br />
+		<br />
+		<br />
+		<iframe id="iframeUrl"></iframe>
+	</center>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+</body>
+</html>
